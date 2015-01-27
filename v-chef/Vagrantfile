@@ -12,7 +12,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     soloc.vm.network :private_network, ip: "192.168.56.104"
     soloc.vm.network "public_network", :bridge => 'en0: Ethernet'
     config.vm.provision "chef_solo" do |chef|
-      chef.add_recipe "apache2"
+      git "#{Chef::Config[:file_cache_path]}/apache2-c" do
+        repository "git://github.com:viverae-cookbooks/apache2.git"
+        action :sync
+      end
       chef.add_recipe "emacs"
     end
   end

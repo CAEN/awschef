@@ -7,3 +7,6 @@
 [submodule "v-chef/cookbooks/apache2"]
 	path = v-chef/cookbooks/apache2
 	url = git://github.com/opscode-cookbooks/apache2.git
+[submodule "v-chef/cookbooks/apt"]
+	path = v-chef/cookbooks/apt
+	url = git://github.com/opscode-cookbooks/apt.git

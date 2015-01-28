@@ -12,7 +12,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     soloc.vm.network :private_network, ip: "192.168.56.104"
     soloc.vm.network "public_network", :bridge => 'en0: Ethernet'
     config.vm.provision "chef_solo" do |chef|
+      chef.add_recipe "apt"
       chef.add_recipe "apache2"
+      chef.add_recipe "apache2::mod_wsgi"
     end
   end
 end

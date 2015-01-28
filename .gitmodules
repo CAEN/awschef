@@ -10,3 +10,6 @@
 [submodule "v-chef/cookbooks/apt"]
 	path = v-chef/cookbooks/apt
 	url = git://github.com/opscode-cookbooks/apt.git
+[submodule "v-chef/cookbooks/opsworks-cookbooks"]
+	path = v-chef/cookbooks/opsworks-cookbooks
+	url = git://github.com:aws/opsworks-cookbooks.git

@@ -1,0 +1,9 @@
+[submodule "v-chef/cookbooks/logrotate"]
+	path = v-chef/cookbooks/logrotate
+	url = git://github.com/opscode-cookbooks/logrotate.git
+[submodule "v-chef/cookbooks/iptables"]
+	path = v-chef/cookbooks/iptables
+	url = git://github.com/opscode-cookbooks/iptables.git
+[submodule "v-chef/cookbooks/apache2"]
+	path = v-chef/cookbooks/apache2
+	url = git://github.com/opscode-cookbooks/apache2.git

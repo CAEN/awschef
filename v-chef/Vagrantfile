@@ -11,7 +11,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # soloc.vm.box = "chef/centos-7.0"
     soloc.vm.host_name = "soloc"
     soloc.vm.network :private_network, ip: "192.168.56.104"
-    soloc.vm.network "public_network", :bridge => 'en0: Ethernet'
+    soloc.vm.network "public_network", :bridge => 'en0: Wi-Fi (AirPort)'
     config.vm.provision "chef_solo" do |chef|
       chef.cookbooks_path = ["site-cookbooks", "cookbooks", "cookbooks/opsworks-cookbooks"]
       chef.add_recipe "apt"

@@ -1,3 +1,6 @@
+#
+# this was helpful: https://github.com/otsuarez/flask2aws
+#
 package "git"
 package "python-setuptools"  # for easy_install
 
@@ -11,7 +14,7 @@ directory "/var/www/flask/appstack" do
 	  action :create
 end
 
-# make a home for our git pull
+# make a home for our git pull and credentials files 
 directory "/tmp/.appstack_deploy/.ssh" do
 	  owner "ubuntu"
 	  recursive true

@@ -8,15 +8,17 @@ conf_dir = node[:apache][:conf_enabled_dir] || "#{node[:apache][:dir]}/conf.d"
 
 # make a home for our flask application
 directory "/var/www/flask/appstack" do
-	  owner "ubuntu"
-	  group "root"
+	  owner node[:apache][:owner]
+	  group node[:apache][:group]
 	  mode "0755"
+	  recursive true
 	  action :create
 end
 
 # make a home for our git pull and credentials files 
 directory "/tmp/.appstack_deploy/.ssh" do
-	  owner "ubuntu"
+	  owner node[:apache][:owner]
+	  group node[:apache][:group]
 	  recursive true
 end
 

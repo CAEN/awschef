@@ -23,6 +23,12 @@ directory "/tmp/.appstack_deploy/.ssh" do
 	  recursive true
 end
 
+# clone the repo to /tmp so we can get at the files
+### deploy "/tmp/.appstack_deploy/" do
+### 	repo "git@github.com:CAEN/operdata.git"
+### 	git_ssh_wrapper "wrap-ssh4git.sh" # sigh...
+### end
+
 # install flask with easy_install
 execute "install_flask" do
 	command "easy_install flask"

@@ -7,16 +7,17 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "soloc" do |soloc|
-    # soloc.vm.box = "ubuntu/trusty64"
-    soloc.vm.box = "chef/centos-7.0"
+    soloc.vm.box = "ubuntu/trusty64"
+    # soloc.vm.box = "chef/centos-7.0"
     soloc.vm.host_name = "soloc"
     soloc.vm.network :private_network, ip: "192.168.56.104"
     soloc.vm.network "public_network", :bridge => 'en0: Ethernet'
     config.vm.provision "chef_solo" do |chef|
-      chef.cookbooks_path = ["cookbooks", "cookbooks/opsworks-cookbooks"]
+      chef.cookbooks_path = ["site-cookbooks", "cookbooks", "cookbooks/opsworks-cookbooks"]
       chef.add_recipe "apt"
       chef.add_recipe "apache2"
       chef.add_recipe "apache2::mod_wsgi"
+      chef.add_recipe "flaskapp"
     end
   end
 end

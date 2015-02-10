@@ -1,5 +1,6 @@
 #
 # this was helpful: https://github.com/otsuarez/flask2aws
+#                   https://developer.github.com/guides/managing-deploy-keys/
 #
 package "git"
 package "python-setuptools"  # for easy_install

@@ -23,11 +23,13 @@ execute "install_flask" do
 	user "root"
 end
 
+# install plotly with easy_install
 execute "install_plotly" do
 	command "easy_install plotly"
 	user "root"
 end
 
+# copy a file from the chef config; this should be deleted
 cookbook_file "#{conf_dir}/flask-virthost.conf" do
 	source "flask-virthost.conf"
 	mode "0644"

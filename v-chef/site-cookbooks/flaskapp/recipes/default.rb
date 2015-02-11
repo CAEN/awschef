@@ -57,12 +57,6 @@ execute "install_plotly" do
 	user "root"
 end
 
-# copy a file from the chef config; this should be deleted
-#cookbook_file "#{conf_dir}/flask-virthost.conf" do
-#	source "flask-virthost.conf"
-#	mode "0644"
-#end
-
 bash "install_jettyhightide" do
 	code <<-EOL
 	cd /tmp/.appstack_deploy/operdata/aggregations/web-app-reports/

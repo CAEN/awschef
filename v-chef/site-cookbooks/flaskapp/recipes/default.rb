@@ -8,7 +8,7 @@ package "python-setuptools"  # for easy_install
 conf_dir = node[:apache][:conf_enabled_dir] || "#{node[:apache][:dir]}/conf.d"
 
 # make a home for our flask application
-directory "/var/www/flask/appstack" do
+directory "/var/www/softwarereport" do
 	  owner node[:apache][:owner]
 	  group node[:apache][:group]
 	  mode "0755"
@@ -38,17 +38,12 @@ cookbook_file "/tmp/.appstack_deploy/wrap-ssh4git.sh" do
 end
 
 # clone the repo to /tmp so we can get at the files
-git "/var/www/flask/appstack" do
+git "/tmp/.appstack_deploy/operdata" do
 	repo "git@bitbucket.org:acaird/operdata.git"
 	user "root"
 	action :checkout
 	ssh_wrapper "/tmp/.appstack_deploy/wrap-ssh4git.sh"
 end
-
-#deploy "/tmp/.appstack_deploy/" do
-#	repo "git@bitbucket.org:acaird/operdata.git"
-#	ssh_wrapper "/tmp/.appstack_deploy/wrap-ssh4git.sh"
-#end
 
 # install flask with easy_install
 execute "install_flask" do
@@ -63,7 +58,15 @@ execute "install_plotly" do
 end
 
 # copy a file from the chef config; this should be deleted
-cookbook_file "#{conf_dir}/flask-virthost.conf" do
-	source "flask-virthost.conf"
-	mode "0644"
+#cookbook_file "#{conf_dir}/flask-virthost.conf" do
+#	source "flask-virthost.conf"
+#	mode "0644"
+#end
+
+bash "install_jettyhightide" do
+	code <<-EOL
+	cd /tmp/.appstack_deploy/operdata/aggregations/web-app-reports/
+	cp webserver/flask-virthost.conf /etc/apache2/conf-enabled/
+	cp -r webserver/softwarereport.wsgi webAppReports.py exclusions.py elasticSearch.py linux-packages.txt templates /var/www/softwarereport
+	EOL
 end

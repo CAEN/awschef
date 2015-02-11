@@ -18,16 +18,37 @@ end
 
 # make a home for our git pull and credentials files 
 directory "/tmp/.appstack_deploy/.ssh" do
-	  owner node[:apache][:owner]
-	  group node[:apache][:group]
+	  owner "root"
+	  group "root"
+	  mode "0755"
 	  recursive true
+	  action :create
+end
+
+cookbook_file "/tmp/.appstack_deploy/.ssh/deployKey" do
+	  source "deployKey"
+	  owner "root"
+	  mode 0600
+end
+
+cookbook_file "/tmp/.appstack_deploy/wrap-ssh4git.sh" do
+	  source "wrap-ssh4git.sh"
+	  owner "root"
+	  mode 0755
 end
 
 # clone the repo to /tmp so we can get at the files
-### deploy "/tmp/.appstack_deploy/" do
-### 	repo "git@github.com:CAEN/operdata.git"
-### 	git_ssh_wrapper "wrap-ssh4git.sh" # sigh...
-### end
+git "/var/www/flask/appstack" do
+	repo "git@bitbucket.org:acaird/operdata.git"
+	user "root"
+	action :checkout
+	ssh_wrapper "/tmp/.appstack_deploy/wrap-ssh4git.sh"
+end
+
+#deploy "/tmp/.appstack_deploy/" do
+#	repo "git@bitbucket.org:acaird/operdata.git"
+#	ssh_wrapper "/tmp/.appstack_deploy/wrap-ssh4git.sh"
+#end
 
 # install flask with easy_install
 execute "install_flask" do
